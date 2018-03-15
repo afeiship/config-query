@@ -1,6 +1,10 @@
 @import "../dist/webkit-sassui-gray.scss";
 .test-webkit-sassui-gray{
   padding-top: 100px;
+  border:1px dashed lighten(salmon,10%);
+  border-radius: 10px;
+  padding:14px;
+
   img{
     display: block;
     margin-bottom: 20px;

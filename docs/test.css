@@ -8,6 +8,9 @@
 /*webkit-sassui-gray End*/
 .test-webkit-sassui-gray {
   padding-top: 100px;
+  border: 1px dashed #fcaca3;
+  border-radius: 10px;
+  padding: 14px;
 }
 
 .test-webkit-sassui-gray img {
