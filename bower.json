@@ -1,0 +1,29 @@
+{
+  "name": "webkit-sassui-gray",
+  "description": "Gray for webkit sassui",
+  "main": [
+    "dist/webkit-sassui-gray.css",
+    "dist/webkit-sassui-gray.scss"
+  ],
+  "authors": [
+    "afei"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "webkit",
+    "cssui",
+    "gray"
+  ],
+  "homepage": "https://github.com/afeiship/webkit-cssui-absolute-center",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ]
+}
