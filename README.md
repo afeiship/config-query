@@ -38,7 +38,35 @@ const configs = [
 
 const query = new ConfigQuery(configs);
 
-// filter by language
+// gets
+const yes_no_items = query.gets({ key: "yes_or_no" });
+console.log(yes_no_items);
+
+
+/** output:
+ *  [
+ *    {
+ *      "school_level": null,
+ *      "language": "zh-CN",
+ *      "key": "yes_or_no",
+ *      "value": [
+ *        { "label": "是", "value": "yes" },
+ *        { "label": "否", "value": "no" }
+ *      ]
+ *    },
+ *    {
+ *      "school_level": null,
+ *      "language": "en-US",
+ *      "key": "yes_or_no",
+ *      "value": [
+ *        { "label": "Yes", "value": "yes" },
+ *        { "label": "No", "value": "no" }
+ *      ]
+ *    }
+ *  ]
+ */
+
+// get by language
 const en = query.get({ language: "en-US" });
 console.log(en);
 
@@ -55,7 +83,7 @@ console.log(en);
  */
 
 // value filter
-const yes = query.get({ key: "yes_or_no", "language": "zh-CN" });
+const yes = query.value({ key: "yes_or_no", "language": "zh-CN" });
 console.log(yes);
 
 
