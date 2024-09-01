@@ -1,58 +1,45 @@
 export interface IConfigQueryOptions {
-  fields: string[];
-  filterMethods?: any;
+  dynamicFilters?: Record<string, () => any> | Record<string, any>;
 }
 
 class ConfigQuery {
   private readonly configs: any[] = [];
-  private readonly options: IConfigQueryOptions = {
-    fields: [],
-    filterMethods: {},
-  };
+  private readonly options?: IConfigQueryOptions = { dynamicFilters: {} };
 
-  constructor(inConfigs: any, inOptions: IConfigQueryOptions) {
+  get calculatedFilters() {
+    const filters = {};
+    const { dynamicFilters } = this.options || {};
+    for (const key in dynamicFilters) {
+      filters[key] = typeof dynamicFilters[key] === 'string' ? dynamicFilters[key] : dynamicFilters[key];
+    }
+    return filters;
+  }
+
+  constructor(inConfigs: any, inOptions?: IConfigQueryOptions) {
+    if (!Array.isArray(inConfigs)) throw new Error('inConfigs must be an Array');
     this.configs = inConfigs;
     this.options = inOptions;
   }
 
-  private getFilterValue(field: string, filters: Record<string, string>) {
-    const { filterMethods } = this.options;
-    // Check if the field has an associated method
-    if (filterMethods?.[field]) {
-      return filterMethods[field]();
-    }
-    // Otherwise, return the value from the filters directly
-    return filters[field];
-  }
-
-  public get(filters: Record<string, string>): any {
-    const result = this.gets(filters);
-    return result.length > 0 ? result[0] : null;
-  }
-
   public gets(filters: Record<string, string>): any[] {
+    const allFilters = { ...this.calculatedFilters, ...filters };
     return this.configs.filter(config => {
-      return this.options.fields.every(field => {
-        const filterValue = this.getFilterValue(field, filters);
-        return filterValue === undefined || config[field] === filterValue;
+      return Object.entries(allFilters).every(([key, value]) => {
+        return config[key] === value;
       });
     });
   }
 
-  public getValue(filters: Record<string, string>): any[] {
-    const result = this.gets(filters);
-    return result.length > 0 ? result[0].value : null;
+  public get(filters: Record<string, string>): any {
+    const selected = this.gets(filters);
+    if (selected.length === 0) return null;
+    return selected[0] || null;
   }
 
-  public getLabelByValue(filters: Record<string, string>, value: string) {
-    const result = this.getValue(filters);
-    if (result) {
-      const item = result.find(v => v.value === value);
-      return item ? item.label : null;
-    }
-    return null;
+  public value(filters: Record<string, string>): any {
+    const selected = this.get(filters);
+    return selected?.value || null;
   }
 }
-
 
 export default ConfigQuery;
