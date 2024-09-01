@@ -43,7 +43,7 @@ const yes_no_items = query.gets({ key: "yes_or_no" });
 console.log(yes_no_items);
 
 
-/** output:
+/* ------------------------------ output ------------------------------
  *  [
  *    {
  *      "school_level": null,
@@ -66,11 +66,12 @@ console.log(yes_no_items);
  *  ]
  */
 
+
 // get by language
 const en = query.get({ language: "en-US" });
 console.log(en);
 
-/** output:
+/* ------------------------------ output ------------------------------
  *   {
  *     "school_level": null,
  *     "language": "en-US",
@@ -82,12 +83,13 @@ console.log(en);
  *   }
  */
 
+
 // value filter
 const yes = query.value({ key: "yes_or_no", "language": "zh-CN" });
 console.log(yes);
 
 
-/** output:
+/* ------------------------------ output ------------------------------
  *  [ 
  *    { "label": "是", "value": "yes" },
  *    { "label": "否", "value": "no" }
