@@ -13,9 +13,58 @@ npm install @jswork/config-query
 
 ## usage
 ```js
-import configQuery from '@jswork/config-query';
+import ConfigQuery from '@jswork/config-query';
 
-// usage goes here.
+const configs = [
+  {
+    school_level: null,
+    language: "zh-CN",
+    key: "yes_or_no",
+    value: [
+      { label: "是", value: "yes" },
+      { label: "否", value: "no" },
+    ],
+  },
+  {
+    school_level: null,
+    language: "en-US",
+    key: "yes_or_no",
+    value: [
+      { label: "Yes", value: "yes" },
+      { label: "No", value: "no" },
+    ],
+  },
+];
+
+const query = new ConfigQuery(configs);
+
+// filter by language
+const en = query.get({ language: "en-US" });
+console.log(en);
+
+/** output:
+ *   {
+ *     "school_level": null,
+ *     "language": "en-US",
+ *     "key": "yes_or_no",
+ *     "value": [
+ *       { "label": "Yes", "value": "yes" },
+ *       { "label": "No", "value": "no" }
+ *     ]
+ *   }
+ */
+
+// value filter
+const yes = query.get({ key: "yes_or_no", "language": "zh-CN" });
+console.log(yes);
+
+
+/** output:
+ *  [ 
+ *    { "label": "是", "value": "yes" },
+ *    { "label": "否", "value": "no" }
+ *  ]
+ */
 ```
 
 ## types
