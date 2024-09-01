@@ -6,7 +6,7 @@ import rollupBanner from '@jswork/rollup-banner';
 export default {
   input: 'src/index.ts',
   output: {
-    name: 'configQuery',
+    name: 'ConfigQuery',
     banner: rollupBanner(),
     file: 'dist/index.umd.js',
     format: 'umd',

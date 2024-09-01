@@ -67,11 +67,6 @@ console.log(yes);
  */
 ```
 
-## types
-```ts
-/// <reference types="@jswork/config-query/global.d.ts" />
-```
-
 ## license
 Code released under [the MIT license](https://github.com/afeiship/config-query/blob/master/LICENSE.txt).
 

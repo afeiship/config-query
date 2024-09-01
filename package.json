@@ -8,7 +8,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "global.d.ts"
+    "src"
   ],
   "scripts": {
     "build": "tsup",
