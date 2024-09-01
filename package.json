@@ -1,6 +1,6 @@
 {
   "name": "@jswork/config-query",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A flexible library for dynamic queries on configuration objects with customizable filters.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
