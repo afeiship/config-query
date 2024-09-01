@@ -10,7 +10,7 @@ class ConfigQuery {
     const filters = {};
     const { dynamicFilters } = this.options || {};
     for (const key in dynamicFilters) {
-      filters[key] = typeof dynamicFilters[key] === 'string' ? dynamicFilters[key] : dynamicFilters[key];
+      filters[key] = typeof dynamicFilters[key] === 'string' ? dynamicFilters[key] : dynamicFilters[key]();
     }
     return filters;
   }

@@ -45,7 +45,7 @@ describe('api.basic', () => {
 
   test('03/gets with dynamicFilters/select should override the default dynamicFilters', () => {
     const config = new Config(local_configs, { dynamicFilters: { school_level: 'graduate', language: () => 'zh-CN' } });
-    expect(config.gets({ key: 'yes_or_no' })).toEqual([]);
+    expect(config.gets({ key: 'yes_or_no' })).toEqual([local_configs[0]]);
     expect(config.gets({ key: 'yes_or_no', language: 'en-US' })).toEqual([local_configs[1]]);
   });
 
