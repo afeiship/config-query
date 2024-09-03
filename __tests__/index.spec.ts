@@ -28,6 +28,14 @@ const local_configs = [
       { label: 'Gender', value: 'female' },
     ],
   },
+  {
+    school_level: 'graduate',
+    language: null,
+    key: 'test',
+    value: [
+      { label: 'Test', value: 'test' },
+    ],
+  },
 ];
 
 describe('api.basic', () => {
@@ -54,12 +62,19 @@ describe('api.basic', () => {
     expect(config.get({ key: 'yes_or_no', language: 'zh-CN' })).toEqual(local_configs[0]);
     expect(config.get({ key: 'yes_or_no', language: 'en-US' })).toEqual(local_configs[1]);
     expect(config.get({ key: 'gender', language: 'zh-Tw' })).toEqual(null);
-  })
+  });
 
-  test('05/directly get value',()=>{
+  test('05/directly get value', () => {
     const config = new Config(local_configs);
     expect(config.value({ key: 'yes_or_no', language: 'zh-CN' })).toEqual(local_configs[0].value);
     expect(config.value({ key: 'yes_or_no', language: 'en-US' })).toEqual(local_configs[1].value);
     expect(config.value({ key: 'gender', language: 'zh-Tw' })).toEqual(null);
-  })
+  });
+
+  test('06/get test key with any language', () => {
+    const config = new Config(local_configs);
+    expect(config.get({ key: 'test', language: 'zh-CN' })).toEqual(local_configs[3]);
+    expect(config.get({ key: 'test', language: 'en-US' })).toEqual(local_configs[3]);
+    expect(config.get({ key: 'test'})).toEqual(local_configs[3]);
+  });
 });

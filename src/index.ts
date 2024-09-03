@@ -25,6 +25,7 @@ class ConfigQuery {
     const allFilters = { ...this.calculatedFilters, ...filters };
     return this.configs.filter(config => {
       return Object.entries(allFilters).every(([key, value]) => {
+        if (config[key] == undefined) return true;
         return config[key] === value;
       });
     });
