@@ -38,8 +38,8 @@ const configs = [
 
 const query = new ConfigQuery(configs);
 
-// gets
-const yes_no_items = query.gets({ key: "yes_or_no" });
+// select by key
+const yes_no_items = query.select({ key: "yes_or_no" });
 console.log(yes_no_items);
 
 
@@ -68,7 +68,7 @@ console.log(yes_no_items);
 
 
 // get by language
-const en = query.get({ language: "en-US" });
+const en = query.find({ language: "en-US" });
 console.log(en);
 
 /* ------------------------------ output ------------------------------

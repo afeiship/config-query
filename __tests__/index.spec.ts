@@ -44,37 +44,37 @@ describe('api.basic', () => {
     expect(config).toBeInstanceOf(Config);
   });
 
-  test('02/gets should get list of values of the specified key', () => {
+  test('02/select should get list of values of the specified key', () => {
     const config = new Config(local_configs);
-    expect(config.gets({ key: 'yes_or_no', language: 'zh-CN' })).toEqual([local_configs[0]]);
-    expect(config.gets({ key: 'yes_or_no' })).toEqual([local_configs[0], local_configs[1]]);
-    expect(config.gets({ key: 'gender' })).toEqual([local_configs[2]]);
+    expect(config.select({ key: 'yes_or_no', language: 'zh-CN' })).toEqual([local_configs[0]]);
+    expect(config.select({ key: 'yes_or_no' })).toEqual([local_configs[0], local_configs[1]]);
+    expect(config.select({ key: 'gender' })).toEqual([local_configs[2]]);
   });
 
-  test('03/gets with dynamicFilters/select should override the default dynamicFilters', () => {
+  test('03/select with dynamicFilters/select should override the default dynamicFilters', () => {
     const config = new Config(local_configs, { dynamicFilters: { school_level: 'graduate', language: () => 'zh-CN' } });
-    expect(config.gets({ key: 'yes_or_no' })).toEqual([local_configs[0]]);
-    expect(config.gets({ key: 'yes_or_no', language: 'en-US' })).toEqual([local_configs[1]]);
+    expect(config.select({ key: 'yes_or_no' })).toEqual([local_configs[0]]);
+    expect(config.select({ key: 'yes_or_no', language: 'en-US' })).toEqual([local_configs[1]]);
   });
 
   test('04/get one', () => {
     const config = new Config(local_configs);
-    expect(config.get({ key: 'yes_or_no', language: 'zh-CN' })).toEqual(local_configs[0]);
-    expect(config.get({ key: 'yes_or_no', language: 'en-US' })).toEqual(local_configs[1]);
-    expect(config.get({ key: 'gender', language: 'zh-Tw' })).toEqual(null);
+    expect(config.find({ key: 'yes_or_no', language: 'zh-CN' })).toEqual(local_configs[0]);
+    expect(config.find({ key: 'yes_or_no', language: 'en-US' })).toEqual(local_configs[1]);
+    expect(config.find({ key: 'gender', language: 'zh-Tw' })).toEqual(null);
   });
 
-  test('05/directly get value', () => {
+  test('05/directly find value', () => {
     const config = new Config(local_configs);
     expect(config.value({ key: 'yes_or_no', language: 'zh-CN' })).toEqual(local_configs[0].value);
     expect(config.value({ key: 'yes_or_no', language: 'en-US' })).toEqual(local_configs[1].value);
     expect(config.value({ key: 'gender', language: 'zh-Tw' })).toEqual(null);
   });
 
-  test('06/get test key with any language', () => {
+  test('06/find test key with any language', () => {
     const config = new Config(local_configs);
-    expect(config.get({ key: 'test', language: 'zh-CN' })).toEqual(local_configs[3]);
-    expect(config.get({ key: 'test', language: 'en-US' })).toEqual(local_configs[3]);
-    expect(config.get({ key: 'test'})).toEqual(local_configs[3]);
+    expect(config.find({ key: 'test', language: 'zh-CN' })).toEqual(local_configs[3]);
+    expect(config.find({ key: 'test', language: 'en-US' })).toEqual(local_configs[3]);
+    expect(config.find({ key: 'test'})).toEqual(local_configs[3]);
   });
 });

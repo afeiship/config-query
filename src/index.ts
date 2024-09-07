@@ -21,7 +21,7 @@ class ConfigQuery {
     this.options = inOptions;
   }
 
-  public gets(filters: Record<string, string>): any[] {
+  public select(filters: Record<string, string>): any[] {
     const allFilters = { ...this.calculatedFilters, ...filters };
     return this.configs.filter(config => {
       return Object.entries(allFilters).every(([key, value]) => {
@@ -31,14 +31,14 @@ class ConfigQuery {
     });
   }
 
-  public get(filters: Record<string, string>): any {
-    const selected = this.gets(filters);
+  public find(filters: Record<string, string>): any {
+    const selected = this.select(filters);
     if (selected.length === 0) return null;
     return selected[0] || null;
   }
 
   public value(filters: Record<string, string>): any {
-    const selected = this.get(filters);
+    const selected = this.find(filters);
     return selected?.value || null;
   }
 }
