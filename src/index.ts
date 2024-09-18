@@ -17,8 +17,8 @@ class ConfigQuery {
   }
 
   constructor(inConfigs: any, inOptions?: IConfigQueryOptions) {
-    if (!Array.isArray(inConfigs)) throw new Error('inConfigs must be an Array');
-    this.configs = inConfigs;
+    if (!Array.isArray(inConfigs)) console.error('inConfigs must be an Array');
+    this.configs = inConfigs || [];
     this.options = inOptions;
   }
 
